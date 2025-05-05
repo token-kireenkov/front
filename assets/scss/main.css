@@ -1,0 +1,277 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body, h1, h2, h3, h4, h5, h6, p, ul[class], ol[class], li, figure, blockquote, dl, dd {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+ul[class], ol[class] {
+  padding-inline: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1, h2, h3, h4, h5, h6,
+button, input, label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img, picture, svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input, button,
+textarea, select {
+  font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-display: swap;
+  font-family: "Akrobat";
+  font-style: normal;
+  font-weight: 400;
+  src: url("~/assets/fonts/Akrobat-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Akrobat";
+  font-style: normal;
+  font-weight: 700;
+  src: url("~/assets/fonts/Akrobat-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+  font-family: "Akrobat";
+  src: url("~/assets/fonts/Akrobat-SemiBold.woff2") format("woff2");
+}
+
+:root {
+  --c-bg: #F6F6F6;
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --c-dark-bg: #191919;
+  --c-active: #ab9273;
+}
+
+body {
+  position: relative;
+  font-family: "Akrobat", sans-serif;
+}
+
+* {
+  border: 1px red;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1900px;
+  width: 100%;
+  padding: 0 136px;
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    padding: 0 40px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+.btn-reset {
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  border-spacing: 0;
+}
+
+.section__blogs {
+  max-width: 1470px;
+  background-color: var(--c-dark-bg);
+  padding: 100px 80px 0;
+  width: 100%;
+  display: flex;
+  row-gap: 40px;
+  flex-direction: column;
+}
+@media screen and (max-width: 1200px) {
+  .section__blogs {
+    padding: 80px 40px 0;
+  }
+}
+@media screen and (max-width: 640px) {
+  .section__blogs {
+    padding: 60px 20px 0;
+  }
+}
+
+.title {
+  position: relative;
+  padding-right: 27%;
+  color: var(--c-white);
+  text-align: right;
+  font-size: clamp(32px, 6vw, 54px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 64.8px */
+  text-transform: uppercase;
+}
+@media screen and (max-width: 1790px) {
+  .title {
+    padding-right: 21%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .title {
+    padding-right: 0;
+  }
+}
+.title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  transform: translateY(-85%);
+  right: 23%;
+  width: 2px;
+  height: 340px;
+  background-color: var(--c-active);
+}
+@media screen and (max-width: 1790px) {
+  .title::before {
+    right: 19%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .title::before {
+    right: -2%;
+  }
+}
+@media screen and (max-width: 640px) {
+  .title::before {
+    display: none;
+  }
+}
+
+.service__wrapper {
+  padding: 100px 80px 0;
+  min-height: 738px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media screen and (max-width: 1200px) {
+  .service__wrapper {
+    padding: 80px 40px 0;
+  }
+}
+@media screen and (max-width: 640px) {
+  .service__wrapper {
+    padding: 80px 20px 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .service__wrapper {
+    padding: 60px 10px 0;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-right: 0;
+}
+
+.service {
+  padding: 0;
+}
+.service__content {
+  padding: 80px;
+}
+@media screen and (max-width: 1200px) {
+  .service__content {
+    padding: 40px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .service__content {
+    padding: 20px;
+  }
+}/*# sourceMappingURL=main.css.map */

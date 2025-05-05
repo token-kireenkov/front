@@ -1,0 +1,146 @@
+body {
+	position: relative;
+	font-family: 'Akrobat', sans-serif;
+	background: #ffffff;
+}
+
+* {
+	border: 1px red;
+}
+.container {
+	margin: 0 auto;
+	max-width: 730px;
+	width: 100%;
+	padding: 0 10px;
+
+	@media screen and (max-width: 1024px) {
+		padding: 0 40px;
+	}
+
+	@media screen and (max-width: 480px) {
+		padding: 0 15px;
+	}
+}
+
+.btn-reset {
+	border: none;
+	padding: 0;
+	background: transparent;
+	cursor: pointer;
+}
+
+.list-reset {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.home {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+table {
+	border-spacing: 0;
+}
+.section__blogs {
+	max-width: 1470px;
+	background-color: var(--c-dark-bg);
+	padding: 100px 80px 0;
+	width: 100%;
+	display: flex;
+	row-gap: 40px;
+	flex-direction: column;
+
+	@media screen and (max-width: 1200px) {
+		padding: 80px 40px 0;
+	}
+
+	@media screen and (max-width: 640px) {
+		padding: 60px 20px 0;
+	}
+}
+.title {
+	position: relative;
+	padding-right: 27%;
+	color: var(--c-white);
+	text-align: right;
+	font-size: clamp(32px, 6vw, 54px);
+	font-style: normal;
+	font-weight: 400;
+	line-height: 120%; /* 64.8px */
+	text-transform: uppercase;
+
+	@media screen and (max-width: 1790px) {
+		padding-right: 21%;
+	}
+
+	@media screen and (max-width: 1200px) {
+		padding-right: 0;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		transform: translateY(-85%);
+		right: 23%;
+		width: 2px;
+		height: 340px;
+		background-color: var(--c-active);
+
+		@media screen and (max-width: 1790px) {
+			right: 19%;
+		}
+
+		@media screen and (max-width: 1200px) {
+			right: -2%;
+		}
+		@media screen and (max-width: 640px) {
+			display: none;
+		}
+	}
+}
+
+.service__wrapper {
+	padding: 100px 80px 0;
+	min-height: 738px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	@media screen and (max-width: 1200px) {
+		padding: 80px 40px 0;
+	}
+
+	@media screen and (max-width: 640px) {
+		padding: 80px 20px 0;
+	}
+
+	@media screen and (max-width: 480px) {
+		padding: 60px 10px 0;
+	}
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	padding-right: 0;
+}
+.service {
+	padding: 0;
+
+	&__content {
+		padding: 80px;
+
+		@media screen and (max-width: 1200px) {
+			padding: 40px;
+		}
+
+		@media screen and (max-width: 640px) {
+			padding: 20px;
+		}
+	}
+}
