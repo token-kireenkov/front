@@ -52,7 +52,9 @@ const generateToken = async (
   secretKey: string
 ): Promise<string> => {
   const filteredData = Object.fromEntries(
-    Object.entries(data).filter(([key]) => key !== 'DATA' && key !== 'Receipt')
+    Object.entries(data).filter(
+      ([key]) => key !== 'DATA' && key !== 'Receipt' && key !== 'Token'
+    )
   )
 
   filteredData['Password'] = secretKey
