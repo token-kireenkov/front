@@ -79,6 +79,8 @@ const generateToken = async (
 }
 
 const handleGenerate = async () => {
+  const scrollY = window.scrollY
+  
   error.value = ''
   outputJson.value = ''
   concatenatedString.value = ''
@@ -101,6 +103,7 @@ const handleGenerate = async () => {
 
   if (errors.length) {
     error.value = errors.join('\n')
+    setTimeout(() => window.scrollTo(0, scrollY), 0)
     return
   }
 
@@ -118,8 +121,10 @@ const handleGenerate = async () => {
     }
 
     outputJson.value = JSON.stringify(withToken, null, 2)
+    setTimeout(() => window.scrollTo(0, scrollY), 0)
   } catch (e) {
     error.value = 'Произошла ошибка при генерации токена.'
+    setTimeout(() => window.scrollTo(0, scrollY), 0)
   }
 }
 </script>
