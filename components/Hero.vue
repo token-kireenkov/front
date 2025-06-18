@@ -31,7 +31,7 @@
 
         <div v-if="outputJson">
           <label class="block mb-2 font-medium">Результат:</label>
-          <pre class="token__result">{{ outputJson }}</pre>
+          <pre class="token__result-1">{{ outputJson }}</pre>
         </div>
 
         <div v-if="concatenatedString">
@@ -164,6 +164,13 @@ const handleGenerate = async () => {
     background: #f5f5f6;
     padding: 15px;
     font-family: monospace;
+    overflow-x: scroll;
+  }
+  &__result-1 {
+    background: #f5f5f6;
+    padding: 15px;
+    font-family: monospace;
+    overflow-x: scroll;
   }
   &__error {
     background: #f5f5f6;
