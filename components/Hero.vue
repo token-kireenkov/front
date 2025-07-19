@@ -29,14 +29,41 @@
           {{ error }}
         </div>
 
-        <div v-if="outputJson">
-          <label class="block mb-2 font-medium">Результат:</label>
+        <div v-if="outputJson" class="token__result-container">
+          <div class="token__result-header">
+            <label class="block mb-2 font-medium">Результат:</label>
+            <button
+              class="token__copy-button"
+              @click="copyToClipboard(outputJson, 'Результат скопирован!')"
+              :disabled="isCopying"
+            >
+              Копировать
+            </button>
+          </div>
           <pre class="token__result-1">{{ outputJson }}</pre>
         </div>
 
-        <div v-if="concatenatedString">
-          <label class="block mb-2 font-medium">Строка конкатенации:</label>
+        <div v-if="concatenatedString" class="token__result-container">
+          <div class="token__result-header">
+            <label class="block mb-2 font-medium">Строка конкатенации:</label>
+            <button
+              class="token__copy-button"
+              @click="
+                copyToClipboard(
+                  concatenatedString,
+                  'Строка конкатенации скопирована!'
+                )
+              "
+              :disabled="isCopying"
+            >
+              Копировать
+            </button>
+          </div>
           <pre class="token__result">{{ concatenatedString }}</pre>
+        </div>
+
+        <div v-if="copyNotification" class="token__notification">
+          {{ copyNotification }}
         </div>
       </div>
     </div>
@@ -51,6 +78,8 @@ const password = ref('')
 const outputJson = ref('')
 const error = ref('')
 const concatenatedString = ref('')
+const isCopying = ref(false)
+const copyNotification = ref('')
 
 const generateToken = async (
   data: Record<string, any>,
@@ -78,9 +107,31 @@ const generateToken = async (
   return { token, concatenated }
 }
 
+const copyToClipboard = async (text: string, message: string) => {
+  if (isCopying.value) return
+
+  isCopying.value = true
+
+  try {
+    await navigator.clipboard.writeText(text)
+    copyNotification.value = message
+
+    setTimeout(() => {
+      copyNotification.value = ''
+    }, 2000)
+  } catch (err) {
+    copyNotification.value = 'Ошибка при копировании'
+    console.error('Ошибка копирования:', err)
+  } finally {
+    setTimeout(() => {
+      isCopying.value = false
+    }, 300)
+  }
+}
+
 const handleGenerate = async () => {
   const scrollY = window.scrollY
-  
+
   error.value = ''
   outputJson.value = ''
   concatenatedString.value = ''
@@ -136,6 +187,13 @@ const handleGenerate = async () => {
     padding: 10px 20px;
     background: #ffdd31;
     border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+      background: #f0d000;
+    }
   }
   &__description {
     margin-bottom: 30px;
@@ -165,18 +223,64 @@ const handleGenerate = async () => {
     padding: 10px;
   }
 
+  &__result-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__copy-button {
+    padding: 8px 16px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 100px;
+
+    &:hover:not(:disabled) {
+      background: #45a049;
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      background: #45a049;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
   &__result {
     background: #f5f5f6;
     padding: 15px;
     font-family: monospace;
     overflow-x: scroll;
+    margin: 0;
   }
+
   &__result-1 {
     background: #f5f5f6;
     padding: 15px;
     font-family: monospace;
     overflow-x: scroll;
+    margin: 0;
   }
+
   &__error {
     background: #f5f5f6;
     padding: 15px;
@@ -184,6 +288,32 @@ const handleGenerate = async () => {
     color: rgb(121, 4, 4);
     display: flex;
     flex-direction: column;
+  }
+
+  &__notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-out;
+    transition: opacity 0.3s ease;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 </style>
